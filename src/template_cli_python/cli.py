@@ -36,7 +36,7 @@ def multiply(lhs: int = 0, rhs: int = 0) -> None:
 
 @app.callback()
 def main() -> None:
-    """main"""
+    """Main"""
     return
 
 
