@@ -19,6 +19,17 @@ typer1 = "template_cli_python.cli:main_cli"
 [tool.hatch.build.targets.wheel]
 packages = [ "src" ]
 
+[tool.pyright]
+venvPath = "."
+include = ["src"]
+exclude = ["**/node_modules",
+    "**/__pycache__",
+    "src/typestubs"
+]
+ignore = ["tests"]
+defineConstant = { DEBUG = true }
+stubPath = "src/stubs"
+
 [tool.ruff]
 line-length = 88
 indent-width = 4
