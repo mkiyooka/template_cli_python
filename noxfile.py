@@ -1,9 +1,9 @@
 import nox
 
-nox.options.default_venv_backend = "uv|virtualenv"
+nox.options.default_venv_backend = "uv"
 
 
-@nox.session(python=["3.10"], tags=["lint"])
+@nox.session(python=["3.13"], tags=["lint"])
 def lint(session) -> None:
     session.install(".")
     session.install("ruff")
@@ -11,8 +11,15 @@ def lint(session) -> None:
     session.run("ruff", "format", ".")
 
 
-@nox.session(python=["3.10"], tags=["type"])
+@nox.session(python=["3.13"], tags=["type"])
 def pyright(session) -> None:
     session.install(".")
     session.install("pyright")
     session.run("pyright")
+
+
+@nox.session(python=["3.13"], tags=["test"])
+def coverage(session) -> None:
+    session.install("-e", ".")
+    session.install("pytest", "pytest-cov")
+    session.run("pytest", "--cov=src", "--cov-report=xml", "--cov-report=term")

@@ -10,6 +10,7 @@ dependencies = [
 
 [dependency-groups]
 test = [
+    "nox>=2025.5.1",
     "ruff>=0.12.3",
 ]
 
@@ -102,3 +103,12 @@ convention = "numpy"
 
 [tool.ruff.lint.flake8-type-checking]
 strict = true
+
+[tool.coverage.run]
+source = ["src/template_cli_python", "src/common"]
+omit = ["noxfile.py", "src/**/__main__.py"]
+branch = true
+
+[tool.coverage.report]
+skip_covered = false
+show_missing = true
