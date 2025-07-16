@@ -15,7 +15,7 @@ test = [
 ]
 
 [project.scripts]
-typer1 = "template_cli_python.cli:main_cli"
+main_app = "template_cli_python.cli:app"
 
 [tool.hatch.build.targets.wheel]
 packages = [ "src" ]

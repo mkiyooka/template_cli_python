@@ -99,10 +99,5 @@ def main() -> None:
     return
 
 
-def main_cli() -> None:
-    """CLIのエントリーポイント"""
-    app()
-
-
 if __name__ == "__main__":
-    main_cli()
+    app()
