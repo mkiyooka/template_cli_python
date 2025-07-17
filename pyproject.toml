@@ -16,6 +16,7 @@ test = [
 
 [project.scripts]
 main_app = "template_cli_python.cli:app"
+sub_app = "template_cli_python.cli_mean:app"
 
 [tool.hatch.build.targets.wheel]
 packages = [ "src" ]
