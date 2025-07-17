@@ -3,6 +3,7 @@
 import typer
 
 import common.arithmetic_ops as ops
+from template_cli_python.cli_mean import app as subapp
 
 app = typer.Typer(
     help="CLI app",
@@ -91,6 +92,9 @@ def sum9(
     9つの数値をポジション引数とオプション引数で受け取り、その合計を表示します。
     """
     typer.echo(a + b + c + d + e + f + g + h + i)
+
+
+app.add_typer(subapp, name="mean", help="平均計算サブコマンド")
 
 
 @app.callback()
