@@ -97,6 +97,7 @@ def sum9(
 app.add_typer(subapp, name="mean", help="平均計算サブコマンド")
 
 
+# サブコマンドではなくオプションとしてバージョンを表示するためのコールバック関数
 def _version_callback(*, show_version: bool) -> None:
     if show_version:  # pragma: no cover
         print("0.1.0")
