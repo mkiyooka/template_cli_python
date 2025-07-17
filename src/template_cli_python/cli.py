@@ -97,8 +97,24 @@ def sum9(
 app.add_typer(subapp, name="mean", help="平均計算サブコマンド")
 
 
+def _version_callback(*, show_version: bool) -> None:
+    if show_version:  # pragma: no cover
+        print("0.1.0")
+        raise typer.Exit()
+
+
 @app.callback()
-def main() -> None:
+def main(
+    *,
+    version: bool = typer.Option(
+        False,
+        "--version",
+        "-v",
+        callback=_version_callback,
+        is_eager=True,
+        help="バージョンを表示して終了",
+    ),
+) -> None:
     """メイン関数"""
     return
 
