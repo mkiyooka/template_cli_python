@@ -32,12 +32,6 @@ ignore = ["tests"]
 defineConstant = { DEBUG = true }
 stubPath = "src/stubs"
 
-[tool.ruff]
-line-length = 88
-indent-width = 4
-force-exclude = true
-fix = true
-
 [tool.ruff.format]
 line-ending = "lf"
 docstring-code-format = true
@@ -45,7 +39,14 @@ quote-style = "double"
 indent-style = "space"
 exclude = ["*.pyi"]
 
+[tool.ruff]
+line-length = 88
+indent-width = 4
+force-exclude = true
+fix = true
+
 [tool.ruff.lint]
+
 select = [
     "ANN", # flake8-annotations
     "B", # flake8-bugbear
@@ -66,7 +67,7 @@ select = [
     "PYI", # flake8-pyi
     "RUF", # ruff-specific rules
     "SIM", # flake8-simplify
-    "TCH", # flake8-type-checking
+    "TC", # flake8-type-checking
     "TD", # flake8-todos
     "TID", # flake8-tidy-imports
     "TRY", # tryceratops
