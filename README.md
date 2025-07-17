@@ -49,3 +49,5 @@ uv venv
 source .venv/bin/activate
 uv pip install .
 ```
+
+[開発茶向けガイド](docs/dev_guide.md)
