@@ -101,7 +101,7 @@ app.add_typer(subapp, name="mean", help="平均計算サブコマンド")
 # サブコマンドではなくオプションとしてバージョンを表示するためのコールバック関数
 def _version_callback(*, show_version: bool) -> None:
     if show_version:  # pragma: no cover
-        print(f"Version: {__version__}")
+        print(f"Version {__version__}")
         raise typer.Exit()
 
 
