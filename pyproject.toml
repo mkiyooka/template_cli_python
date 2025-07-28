@@ -153,7 +153,7 @@ prerelease_token = "alpha"
 exclude_commit_patterns = []
 mode = "update"
 insertion_flag = "<!-- version list -->"
-template_dir = "templates"
+template_dir = "release"
 
 [tool.semantic_release.changelog.default_templates]
 changelog_file = "CHANGELOG.md"
