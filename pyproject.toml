@@ -1,0 +1,140 @@
+[project]
+name = "template-cli-python"
+version = "0.0.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "typer>=0.16.0",
+]
+
+[dependency-groups]
+dev = [
+    "commitizen>=4.8.3",
+]
+
+test = [
+    "coverage>=7.10.1",
+    "pyright[nodejs]>=1.1.403",
+    "nox>=2025.5.1",
+    "pytest>=8.4.1",
+    "pytest-cov>=6.2.1",
+    "ruff>=0.12.3",
+]
+
+[project.scripts]
+main_app = "template_cli_python.cli:app"
+sub_app = "template_cli_python.cli_mean:app"
+
+[tool.hatch.build.targets.wheel]
+packages = [ "template_cli_python" ]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["template_cli_python*"]
+exclude = ["tests*", "context*"]
+
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[tool.pyright]
+venvPath = "."
+include = [ "template_cli_python" ]
+exclude = ["**/node_modules",
+    "**/__pycache__",
+    "template_cli_python/typestubs"
+]
+ignore = ["tests"]
+defineConstant = { DEBUG = true }
+stubPath = "template_cli_python/stubs"
+
+[tool.ruff.format]
+line-ending = "lf"
+docstring-code-format = true
+quote-style = "double"
+indent-style = "space"
+exclude = ["*.pyi"]
+
+[tool.ruff]
+line-length = 88
+indent-width = 4
+force-exclude = true
+fix = true
+
+[tool.ruff.lint]
+
+select = [
+    "ANN", # flake8-annotations
+    "B", # flake8-bugbear
+    "C4", # flake8-comprehensions
+    "D", # flake8-docstrings
+    "E", # pycodestyle errors
+    "EM", # flake8-errmsg
+    "F", # pyflakes
+    "FA", # flake8-future-annotations
+    "FBT001", # flake8-boolean-trap
+    "I", # isort
+    "ICN", # flake8-import-conventions
+    "INT", # flake8-gettext
+    "PERF", # perflint
+    "PIE", # flake8-pie
+    "PT", # flake8-pytest-style
+    "PTH", # flake8-use-pathlib
+    "PYI", # flake8-pyi
+    "RUF", # ruff-specific rules
+    "SIM", # flake8-simplify
+    "TC", # flake8-type-checking
+    "TD", # flake8-todos
+    "TID", # flake8-tidy-imports
+    "TRY", # tryceratops
+    "UP", # pyupgrade
+    "W", # pycodestyle warnings
+]
+
+ignore = [
+    "ANN401", # Dynamically typed expressions (Any) are disallowed
+    "D400", # First line should end with a period
+    "D401", # Relax NumPy docstring convention: first line should be imperative
+    "E501", # Line length regulated by formatter
+    "PT011", # pytest.raises is too broad, set match or use a more specific exception
+    "PYI041", # Use float instead of int | float
+    "RUF022", # `__all__` is not sorted
+    "RUF005", # Consider expression instead of concatenation
+    "SIM108", # Use ternary operator
+    "SIM114", # Combine `if` branches
+    "TD002", # Missing author in TODO
+    "TD003", # Missing issue link on the line following this TODO
+    "TRY003", # Avoid specifying long messages outside the exception class
+]
+
+[tool.ruff.lint.pycodestyle]
+max-doc-length = 88
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["D100", "D102", "D103", "B018", "FBT001"]
+"__init__.py" = ["D100", "D104"]
+"__main__.py" = ["D100", "D104"]
+"noxfile.py" = ["ANN", "D100", "D103", "D104"]
+
+[tool.ruff.lint.flake8-type-checking]
+strict = true
+
+[tool.coverage.run]
+source = ["template_cli_python/**/*.py"]
+branch = true
+
+[tool.coverage.report]
+skip_covered = false
+show_missing = true
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "$version"
+version_scheme = "semver2"
+version_provider = "uv"
+update_changelog_on_bump = true
+major_version_zero = true
