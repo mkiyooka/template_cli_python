@@ -51,4 +51,7 @@ source .venv/bin/activate
 uv pip install .
 ```
 
-[開発者向けガイド](docs/dev_guideline.md)
+## 開発者向けガイド
+
+- [基本](docs/development-guide-basic.md)
+- [開発用ツール導入](docs/development-guide-tools.md)
