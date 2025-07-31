@@ -126,10 +126,10 @@ cython_debug/
 .vscode/
 
 # environment variables
-mise.toml
-.mise.toml
-.envrc
-.env
+/mise.toml
+/.mise.toml
+/.envrc
+/.env
 
 # Version file
 _version.py

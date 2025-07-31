@@ -11,9 +11,6 @@ dependencies = [
 [dependency-groups]
 dev = [
     "commitizen>=4.8.3",
-]
-
-test = [
     "coverage>=7.10.1",
     "pyright[nodejs]>=1.1.403",
     "nox>=2025.5.1",
@@ -138,3 +135,8 @@ version_scheme = "semver2"
 version_provider = "uv"
 update_changelog_on_bump = true
 major_version_zero = true
+
+[tool.taskipy.tasks]
+test = { cmd = "uv run --frozen pytest --cov=src --cov-report=term", help = "run pytest with coverage report" }
+lint = { cmd = "uv run --frozen ruff check --fix --show-fixes --exit-non-zero-on-fix", help = "run lint" }
+format = { cmd = "uv run --frozen ruff format", help = "run format" }

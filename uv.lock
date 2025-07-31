@@ -637,7 +637,7 @@ wheels = [
 
 [[package]]
 name = "template-cli-python"
-version = "0.2.1"
+version = "0.0.0"
 source = { editable = "." }
 dependencies = [
     { name = "typer" },
@@ -646,8 +646,6 @@ dependencies = [
 [package.dev-dependencies]
 dev = [
     { name = "commitizen" },
-]
-test = [
     { name = "coverage" },
     { name = "nox" },
     { name = "pyright", extra = ["nodejs"] },
@@ -660,8 +658,8 @@ test = [
 requires-dist = [{ name = "typer", specifier = ">=0.16.0" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "commitizen", specifier = ">=4.8.3" }]
-test = [
+dev = [
+    { name = "commitizen", specifier = ">=4.8.3" },
     { name = "coverage", specifier = ">=7.10.1" },
     { name = "nox", specifier = ">=2025.5.1" },
     { name = "pyright", extras = ["nodejs"], specifier = ">=1.1.403" },
