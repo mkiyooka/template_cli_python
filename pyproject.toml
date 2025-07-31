@@ -35,6 +35,13 @@ exclude = ["tests*", "context*"]
 requires = ["setuptools>=64"]
 build-backend = "setuptools.build_meta"
 
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "v$version"
+version_scheme = "semver2"
+update_changelog_on_bump = true
+major_version_zero = true
+
 [tool.pyright]
 venvPath = "."
 include = [ "template_cli_python" ]
@@ -127,14 +134,6 @@ branch = true
 [tool.coverage.report]
 skip_covered = false
 show_missing = true
-
-[tool.commitizen]
-name = "cz_conventional_commits"
-tag_format = "$version"
-version_scheme = "semver2"
-version_provider = "uv"
-update_changelog_on_bump = true
-major_version_zero = true
 
 [tool.taskipy.tasks]
 test = { cmd = "uv run --frozen pytest --cov=src --cov-report=term", help = "run pytest with coverage report" }
