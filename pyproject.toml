@@ -17,6 +17,7 @@ dev = [
     "pytest>=8.4.1",
     "pytest-cov>=6.2.1",
     "ruff>=0.12.3",
+    "taskipy>=1.14.1",
 ]
 
 [project.scripts]
@@ -122,6 +123,7 @@ convention = "numpy"
 "tests/**/*.py" = ["D100", "D102", "D103", "B018", "FBT001"]
 "__init__.py" = ["D100", "D104"]
 "__main__.py" = ["D100", "D104"]
+"__version__.py" = ["D100"]
 "noxfile.py" = ["ANN", "D100", "D103", "D104"]
 
 [tool.ruff.lint.flake8-type-checking]
@@ -136,6 +138,8 @@ skip_covered = false
 show_missing = true
 
 [tool.taskipy.tasks]
-test = { cmd = "uv run --frozen pytest --cov=src --cov-report=term", help = "run pytest with coverage report" }
-lint = { cmd = "uv run --frozen ruff check --fix --show-fixes --exit-non-zero-on-fix", help = "run lint" }
 format = { cmd = "uv run --frozen ruff format", help = "run format" }
+lint = { cmd = "uv run --frozen ruff check --fix --show-fixes --exit-non-zero-on-fix", help = "run lint" }
+typecheck = { cmd = "uv run --frozen pyright", help = "run typecheck" }
+test = { cmd = "uv run --frozen pytest --cov=src --cov-report=term", help = "run pytest with coverage report" }
+check = { cmd ="task format && task lint && task typecheck", help = "run format, lint, typecheck" }

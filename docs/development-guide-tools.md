@@ -181,11 +181,11 @@ uv run --frozen pytest tests/test_arithmetic_ops.py
 **設定例** (`pyproject.toml`に以下のような設定を追加)：
 ```toml
 [tool.taskipy.tasks]
-format = "ruff format ."
-lint = "ruff check ."
-typecheck = "pyright"
-test = "pytest --cov=src"
-check = "task format && task lint && task typecheck && task test"
+format = { cmd = "uv run --frozen ruff format", help = "run format" }
+lint = { cmd = "uv run --frozen ruff check --fix --show-fixes --exit-non-zero-on-fix", help = "run lint" }
+typecheck = { cmd = "uv run --frozen pyright", help = "run typecheck" }
+test = { cmd = "uv run --frozen pytest --cov=src --cov-report=term", help = "run pytest with coverage report" }
+check = { cmd ="task format && task lint && task typecheck", help = "run format, lint, typecheck" }
 ```
 
 **使用方法**:
