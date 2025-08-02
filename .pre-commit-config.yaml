@@ -18,6 +18,7 @@ repos:
       - id: format-toml
         name: Format TOML Files
         description: This hook formats TOML files.
-        entry: taplo fmt
+        entry: taplo
+        args: ["fmt"]
         language: toml
         types: [toml]
