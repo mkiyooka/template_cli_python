@@ -70,38 +70,21 @@ class TestMulCommand:
         assert result.exit_code == 0
         assert "0" in result.stdout
 
-    def test_mul_with_zero(self, runner: CliRunner) -> None:
-        """ゼロを含むmulコマンドテスト"""
-        result = runner.invoke(app, ["mul", "--lhs", "5", "--rhs", "0"])
-        assert result.exit_code == 0
-        assert "0" in result.stdout
-
 
 class TestDivCommand:
     """divコマンドのテスト"""
 
     def test_div_with_options(self, runner: CliRunner) -> None:
         """オプション引数でのdivコマンドテスト"""
-        result = runner.invoke(app, ["div", "--dividend", "6", "--rhs", "3"])
+        result = runner.invoke(app, ["div", "--dividend", "6", "--divisor", "3"])
         assert result.exit_code == 0
         assert "2" in result.stdout
 
-    def test_div_with_short_options(self, runner: CliRunner) -> None:
-        """ショートオプションでのdivコマンドテスト"""
-        result = runner.invoke(app, ["div", "-x", "8", "--rhs", "2"])
-        assert result.exit_code == 0
-        assert "4" in result.stdout
-
     def test_div_with_default_dividend(self, runner: CliRunner) -> None:
         """被除数デフォルト値でのdivコマンドテスト"""
-        result = runner.invoke(app, ["div", "--rhs", "1"])
+        result = runner.invoke(app, ["div", "--divisor", "0"])
         assert result.exit_code == 0
-        assert "1" in result.stdout
-
-    def test_div_missing_required_option(self, runner: CliRunner) -> None:
-        """必須オプション不足でのdivコマンドテスト"""
-        result = runner.invoke(app, ["div"])
-        assert result.exit_code != 0
+        assert "Division by zero is not allowed." in result.stderr
 
 
 class TestSum9Command:

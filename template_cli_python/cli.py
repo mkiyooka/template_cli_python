@@ -66,8 +66,8 @@ def multiply(lhs: int = 0, rhs: int = 0) -> None:
 # Annotated typer.Optionを使用してオプション引数を定義
 @app.command()
 def div(
-    lhs: int = typer.Option(1, "-x", "--dividend", help="Dividend"),
-    rhs: int = typer.Option(..., help="Divisor (non-zero)"),
+    lhs: int = typer.Option(10, "-x", "--dividend", help="Dividend"),
+    rhs: int = typer.Option(..., "-y", "--divisor", help="Divisor (non-zero)"),
 ) -> None:
     """2つの数値の除算
 
@@ -76,7 +76,10 @@ def div(
     * dividend: (int) 被除数
     * divisor: (int) 除数 (ゼロでないこと)
     """
-    typer.echo(ops.div(lhs, rhs))
+    try:
+        typer.echo(ops.div(lhs, rhs))
+    except ZeroDivisionError:
+        typer.echo("Division by zero is not allowed.", err=True)
 
 
 @app.command()
