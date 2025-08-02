@@ -1,4 +1,4 @@
-# README
+# Python CLI application template
 
 ## 利用者向けの説明
 
