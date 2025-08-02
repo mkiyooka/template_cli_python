@@ -131,13 +131,7 @@ testpaths = ["tests"]
 python_files = ["test_*.py", "*_test.py"]
 python_functions = ["test_*"]
 pythonpath = "template_cli_python"
-addopts = [
-    "--strict-markers",
-    "--strict-config",
-    "--cov=template_cli_python",
-    "--cov-report=term-missing",
-    "--cov-report=term",
-]
+addopts = ["--strict-markers", "--strict-config"]
 
 [tool.coverage.run]
 source = ["template_cli_python/**/*.py"]
@@ -146,7 +140,7 @@ branch = true
 [tool.coverage.report]
 skip_covered = false
 show_missing = true
-omit = ["tests/*", "template_cli_python/__main__.py", "noxfile.py"]
+omit = ["tests/*", "noxfile.py", "template_cli_python/__main__.py"]
 
 [tool.taskipy.tasks]
 format = { cmd = "uv run --frozen ruff format", help = "run format" }
