@@ -1,7 +1,7 @@
 import pytest
 from typer.testing import CliRunner
 
-from template_cli_python import cli_mean
+from template_cli_python.command import mean as cli_mean
 
 
 @pytest.fixture

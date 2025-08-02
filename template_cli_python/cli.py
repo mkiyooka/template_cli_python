@@ -8,7 +8,7 @@ except ImportError:
 
 import typer
 
-from template_cli_python.cli_mean import app as subapp
+from template_cli_python.command.mean import app as subapp
 from template_cli_python.common import arithmetic_ops as ops
 
 app = typer.Typer(

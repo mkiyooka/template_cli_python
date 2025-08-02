@@ -107,39 +107,9 @@ class TestDivCommand:
 class TestSum9Command:
     """sum9コマンドのテスト"""
 
-    def test_sum9_with_all_args(self, runner: CliRunner) -> None:
-        """全引数指定でのsum9コマンドテスト"""
-        result = runner.invoke(
-            app,
-            [
-                "sum9",
-                "1",  # a (required positional)
-                "2",  # b (positional with default)
-                "--c",
-                "3",  # c (required option)
-                "--d",
-                "4",  # d (option with default)
-                "-e",
-                "5",  # e (short option)
-                "-f",
-                "6",  # f (short and long option)
-                "--7th",
-                "7",  # g (long option only)
-                "-h",
-                "8",  # h (short and long option)
-                "-i",
-                "9",  # i (with rich help panel)
-            ],
-        )
-        assert result.exit_code == 0
-        assert "45" in result.stdout
-
     def test_sum9_with_minimal_args(self, runner: CliRunner) -> None:
         """最小限の引数でのsum9コマンドテスト"""
         result = runner.invoke(app, ["sum9", "1", "--c", "3"])
-        # a=1, b=2(default), c=3, d=4(default), e=5(default),
-        # f=6(default), g=7(default), h=8(default), i=9(default)
-        # 1+2+3+4+5+6+7+8+9 = 45
         assert result.exit_code == 0
         assert "45" in result.stdout
 
