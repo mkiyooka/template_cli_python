@@ -23,13 +23,8 @@ pip install git+https://github.com/mkiyooka/template_cli_python.git
 サンプルコマンドの実行方法
 
 ```sh
-# サブコマンドで四則演算を、サブサブコマンドで各種平均計算を提供
+# 四則演算や平均計算など、すべての機能は main_app コマンドで利用できます。
 main_app --help
-```
-
-``` sh
-# 平均計算サブコマンドのみを提供
-sub_app --help
 ```
 
 アンインストール方法
