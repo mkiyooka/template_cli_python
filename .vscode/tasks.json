@@ -20,7 +20,9 @@
             "args": [
                 "-m",
                 "pytest",
-                "-v"
+                "-v",
+                "--cov",
+                "template_cli_python",
             ],
             "problemMatcher": [],
             "group": {
@@ -44,6 +46,7 @@
                 "-m",
                 "pytest",
                 "-v",
+                "--no-cov",
                 "${file}",
             ],
             "group": "test",

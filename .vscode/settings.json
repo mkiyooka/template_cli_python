@@ -3,6 +3,7 @@
     "[python]": {
       "editor.rulers": [88],
       "editor.formatOnSave": true,
+      "editor.defaultFormatter": "charliermarsh.ruff",
       "editor.codeActionsOnSave": {
         "source.fixAll": "explicit",
         "source.organizeImports": "explicit"
@@ -12,18 +13,19 @@
     "ruff.lint.enable": true,
     "ruff.importStrategy": "fromEnvironment",
     /* Python testing configuration */
-    "python.testing.pytestArgs": [],
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
     "python.testing.autoTestDiscoverOnSaveEnabled": true,
-    "python.testing.promptToConfigure": false,
     /* Python path configuration */
     "python.terminal.activateEnvironment": true,
     "python.terminal.executeInFileDir": false,
     /* Python environment for testing */
     "python.experiments.optInto": ["pythonTestAdapter"],
+    /* toml file settings */
     "[toml]": {
       "editor.defaultFormatter": "tamasfe.even-better-toml",
       "editor.formatOnSave": true,
     },
+    "evenBetterToml.taplo.configFile.enabled": true,
+    "evenBetterToml.taplo.configFile.path": "${workspaceFolder}/taplo.toml",
 }
