@@ -126,15 +126,6 @@ convention = "numpy"
 [tool.ruff.lint.flake8-type-checking]
 strict = true
 
-[tool.coverage.run]
-source = ["template_cli_python/**/*.py"]
-branch = true
-
-[tool.coverage.report]
-skip_covered = false
-show_missing = true
-omit = ["template_cli_python/tests/*", "noxfile.py"]
-
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 python_files = ["test_*.py", "*_test.py"]
@@ -147,6 +138,15 @@ addopts = [
     "--cov-report=term-missing",
     "--cov-report=term",
 ]
+
+[tool.coverage.run]
+source = ["template_cli_python/**/*.py"]
+branch = true
+
+[tool.coverage.report]
+skip_covered = false
+show_missing = true
+omit = ["tests/*", "template_cli_python/__main__.py", "noxfile.py"]
 
 [tool.taskipy.tasks]
 format = { cmd = "uv run --frozen ruff format", help = "run format" }
