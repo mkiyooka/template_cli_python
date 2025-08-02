@@ -13,12 +13,3 @@ repos:
         args: ["--fix", "--show-fixes", "--exit-non-zero-on-fix"]
       - id: ruff-format
         types_or: [python, pyi]
-  - repo: local
-    hooks:
-      - id: format-toml
-        name: Format TOML Files
-        description: This hook formats TOML files.
-        entry: taplo
-        args: ["fmt"]
-        language: toml
-        types: [toml]
