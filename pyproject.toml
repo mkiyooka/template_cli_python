@@ -18,6 +18,7 @@ dev = [
     "pytest-cov>=6.2.1",
     "ruff>=0.12.3",
     "taskipy>=1.14.1",
+    "ipykernel>=6.30.0",
 ]
 
 [project.scripts]
@@ -137,10 +138,27 @@ branch = true
 [tool.coverage.report]
 skip_covered = false
 show_missing = true
+omit = [
+    "template_cli_python/tests/*",
+    "noxfile.py",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_functions = ["test_*"]
+pythonpath = "template_cli_python"
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--cov=template_cli_python",
+    "--cov-report=term-missing",
+    "--cov-report=term",
+]
 
 [tool.taskipy.tasks]
 format = { cmd = "uv run --frozen ruff format", help = "run format" }
 lint = { cmd = "uv run --frozen ruff check --fix --show-fixes --exit-non-zero-on-fix", help = "run lint" }
 typecheck = { cmd = "uv run --frozen pyright", help = "run typecheck" }
-test = { cmd = "uv run --frozen pytest --cov=src --cov-report=term", help = "run pytest with coverage report" }
+test = { cmd = "uv run --frozen pytest --cov=template_cli_python --cov-report=term", help = "run pytest with coverage report" }
 check = { cmd ="task format && task lint && task typecheck", help = "run format, lint, typecheck" }

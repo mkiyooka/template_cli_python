@@ -22,4 +22,4 @@ def pyright(session) -> None:
 def coverage(session) -> None:
     session.install("-e", ".")
     session.install("pytest", "pytest-cov")
-    session.run("pytest", "--cov=src", "--cov-report=xml", "--cov-report=term")
+    session.run("pytest")

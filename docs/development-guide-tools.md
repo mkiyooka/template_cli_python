@@ -299,3 +299,63 @@ uv run nox
 - **lint**: Ruffによるコードスタイルチェックとフォーマット
 - **pyright**: Pyrightによる静的型チェック
 - **coverage**: Pytestによるテスト実行とカバレッジ計測
+
+---
+
+## ツール間の呼び出し関係と利用例
+
+以下の表は、各種設定ファイル（`.pre-commit-config.yaml`, `pyproject.toml`, `noxfile.py`）を通じて、主要な開発ツール（taskipy, pytest, ruff, pyright, coverage, commitizen）がどのように呼び出され、どのような場面で利用できるかを示しています。
+
+#### ツール呼び出し関係マトリックス
+
+以下の表は、各実行方法から、どの実行ツールが呼び出されるかを示しています。
+
+| 実行方法 ＼ 実行ツール | ruff | pyright | pytest | commitizen |
+|:---|:---|:---|:---|:---|
+| **VS Code** | ✅ 保存時/編集時 | ✅ リアルタイム | ✅ テスト機能 | ❌ |
+| **pre-commit** | ✅ コミット時 | ❌ | ❌ | ✅ コミット時 |
+| **uv run** | ✅ 直接実行 | ✅ 直接実行 | ✅ 直接実行 | ✅ 直接実行 |
+| **taskipy** | ✅ task format/lint | ✅ task typecheck | ✅ task test | ❌ |
+| **nox** | ✅ lint セッション | ✅ pyright セッション | ✅ coverage セッション | ❌ |
+
+#### 詳細な呼び出し経路
+
+| 実行方法 | 具体的なコマンド例 | 呼び出される実行ツール |
+|:---|:---|:---|
+| **VS Code (extension)** | 自動実行（設定依存） | ruff, pyright |
+| **VS Code (test機能)** | テストエクスプローラー | pytest |
+| **git commit** | `git commit` → pre-commit hooks | ruff, commitizen |
+| **uv run 直接** | `uv run --frozen ruff check` | ruff |
+| | `uv run --frozen pyright` | pyright |
+| | `uv run --frozen pytest --cov=src` | pytest |
+| | `uv run --frozen cz commit` | commitizen |
+| **taskipy経由** | `uv run task format` | ruff format |
+| | `uv run task lint` | ruff check |
+| | `uv run task typecheck` | pyright |
+| | `uv run task test` | pytest --cov |
+| | `uv run task check` | ruff + pyright (複合) |
+| **nox経由** | `uv run nox -s lint` | ruff check + format |
+| | `uv run nox -s pyright` | pyright |
+| | `uv run nox -s coverage` | pytest --cov |
+| | `uv run nox` | 全セッション実行 |
+
+
+### 利用例まとめ（補足）
+
+- **VS Code**: 拡張機能（extension）経由で`ruff`や`pyright`が自動実行され、保存時や編集時に品質・型チェックが可能。テスト機能からも`pytest`を実行可能。
+- **pre-commit**: `git commit`時に`ruff`と`commitizen`が自動実行され、コミット前に品質・メッセージ形式を強制。
+- **uv run**: `uv run`コマンドの下で`uv run --frozen ruff/pyright/pytest/commitizen`など個別に実行可能。
+- **taskipy**: `uv run task check`で`task format`、`task lint`、`task typecheck`、`task test`など複数のタスク（taskipyタスク）が順次呼び出される。
+- **nox**: `uv run nox`の1コマンドで、リント・型チェック・テストが全て自動で実行される。
+
+#### 設定ファイルの役割
+
+| ファイル | 役割 | 実行タイミング |
+|---------|------|--------------|
+| `.pre-commit-config.yaml` | コミット時の自動チェック | `git commit` 実行時 |
+| `pyproject.toml` [tool.taskipy.tasks] | 開発タスクの簡略化 | `uv run task <タスク名>` 実行時 |
+| `pyproject.toml` [tool.ruff.*] | Ruffの動作設定 | Ruff実行時の全場面 |
+| `pyproject.toml` [tool.pyright] | Pyrightの動作設定 | Pyright実行時の全場面 |
+| `pyproject.toml` [tool.coverage.*] | カバレッジ計測設定 | Pytest実行時 |
+| `noxfile.py` | CI/CD用の隔離実行環境 | `uv run nox` 実行時 |
+| `_vscode/settings.json` | VS Code統合設定 | VS Code使用時 |

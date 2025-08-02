@@ -4,6 +4,7 @@
         "charliermarsh.ruff",
         "ms-pyright.pyright",
         "njpwerner.autodocstring",
-        "edidtorconfig.editorconfig",
+        "editorconfig.editorconfig",
+        "tamasfe.even-better-toml",
     ]
 }

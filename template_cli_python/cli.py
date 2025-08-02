@@ -4,7 +4,7 @@ try:
     from template_cli_python import __version__
 except ImportError:
     # __version__が定義されていない場合のデフォルト値
-    __version__ = "0.1.0"
+    __version__ = "0.0.0"
 
 import typer
 

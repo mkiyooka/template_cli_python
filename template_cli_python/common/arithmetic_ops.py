@@ -4,8 +4,6 @@ Provides basic arithmetic operations.
 These include addition, subtraction, multiplication, and division.
 """
 
-from decimal import DivisionByZero
-
 
 def add(lhs: float, rhs: float) -> float:
     """Addition function
@@ -103,7 +101,7 @@ def div(lhs: float, rhs: float) -> float:
     """
     if rhs == 0:
         msg = "Division by zero is not allowed."
-        raise DivisionByZero(msg)
+        raise ZeroDivisionError(msg)
     if lhs == 0:
         return 0
 
