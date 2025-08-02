@@ -158,6 +158,29 @@ class TestSubcommand:
         result = runner.invoke(app, ["mean", "--help"])
         assert result.exit_code == 0
 
+    def test_arithmetic_mean(self, runner: CliRunner) -> None:
+        """算術平均のテスト"""
+        result = runner.invoke(app, ["mean", "arithmetic", "1", "2"])
+        assert result.exit_code == 0
+        assert "1.5" in result.stdout
+
+    def test_geometric_mean(self, runner: CliRunner) -> None:
+        """幾何平均のテスト"""
+        result = runner.invoke(app, ["mean", "geometric", "4", "16"])
+        assert result.exit_code == 0
+        assert "8.0" in result.stdout
+
+    def test_harmonic_mean(self, runner: CliRunner) -> None:
+        """調和平均のテスト"""
+        result = runner.invoke(app, ["mean", "harmonic", "4", "6"])
+        assert result.exit_code == 0
+        assert "4.8" in result.stdout
+
+    def test_harmonic_mean_with_zero(self, runner: CliRunner) -> None:
+        """調和平均でゼロが含まれる場合のテスト"""
+        result = runner.invoke(app, ["mean", "harmonic", "0", "60"])
+        assert result.exit_code == 0
+
 
 class TestInvalidCommands:
     """無効なコマンドのテスト"""
