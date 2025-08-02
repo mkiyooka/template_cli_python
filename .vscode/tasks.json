@@ -16,10 +16,9 @@
         {
             "label": "test",
             "type": "shell",
-            "command": "uv",
+            "command": "${command:python.interpreterPath}",
             "args": [
-                "run",
-                "--frozen",
+                "-m",
                 "pytest",
                 "-v"
             ],
@@ -40,13 +39,12 @@
         {
             "label": "pytest (current file)",
             "type": "shell",
-            "command": "uv",
+            "command": "${command:python.interpreterPath}",
             "args": [
-                "run",
-                "--frozen",
+                "-m",
                 "pytest",
+                "-v",
                 "${file}",
-                "-v"
             ],
             "group": "test",
             "presentation": {
