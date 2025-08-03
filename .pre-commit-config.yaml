@@ -30,7 +30,7 @@ repos:
       description: 'pyright type checker'
       entry: pyright
       language: node
-      types: [python, pyi]
+      types_or: [python, pyi]
       pass_filenames: true
       args: []
       require_serial: false
@@ -40,7 +40,7 @@ repos:
       description: 'pytest testing framework'
       entry: pytest
       language: python
-      types: [python, pyi]
+      types_or: [python, pyi]
       pass_filenames: false
       args: []
       require_serial: false
