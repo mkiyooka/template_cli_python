@@ -70,7 +70,5 @@ if __name__ == "__main__":
             timeout=10,
         )
 
-        # 正常終了することを確認
         assert result.returncode == 0
-        # ヘルプメッセージが含まれることを確認
         assert "Usage:" in result.stdout
