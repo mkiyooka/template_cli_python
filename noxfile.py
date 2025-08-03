@@ -11,14 +11,14 @@ def lint(session) -> None:
     session.run("ruff", "format", ".")
 
 
-@nox.session(python=["3.13"], tags=["type"])
+@nox.session(python=["3.10", "3.13"], tags=["type"])
 def pyright(session) -> None:
     session.install(".")
     session.install("pyright")
     session.run("pyright")
 
 
-@nox.session(python=["3.13"], tags=["test"])
+@nox.session(python=["3.10", "3.11", "3.12", "3.13"], tags=["test"])
 def coverage(session) -> None:
     session.install("-e", ".")
     session.install("pytest", "pytest-cov")

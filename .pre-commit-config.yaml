@@ -15,7 +15,17 @@ repos:
         types_or: [python, pyi]
   - repo: local
     hooks:
-    - id: nox
+    - id: nox-lite
+      name: nox
+      description: 'nox testing framework'
+      entry: nox --python 3.13
+      language: python
+      types_or: [python, pyi]
+      pass_filenames: false
+      stages: [pre-commit]
+      args: []
+      require_serial: false
+    - id: nox-full
       name: nox
       description: 'nox testing framework'
       entry: nox
@@ -25,16 +35,17 @@ repos:
       stages: [pre-push]
       args: []
       require_serial: false
-    - id: pyright
-      name: pyright
-      description: 'pyright type checker'
-      entry: pyright
-      language: node
-      types_or: [python, pyi]
-      pass_filenames: true
-      args: []
-      require_serial: false
-      stages: [pre-commit]
+    # - id: pyright
+    #   name: pyright
+    #   description: 'pyright type checker'
+    #   entry: pyright
+    #   language: python
+    #   types_or: [python, pyi]
+    #   pass_filenames: true
+    #   args: []
+    #   require_serial: false
+    #   stages: [pre-commit]
+    #   additional_dependencies: ["pyright[nodejs]>=1.1.403"]
     - id: pytest
       name: pytest
       description: 'pytest testing framework'
