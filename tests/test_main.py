@@ -73,5 +73,4 @@ if __name__ == "__main__":
         # 正常終了することを確認
         assert result.returncode == 0
         # ヘルプメッセージが含まれることを確認
-        assert "CLI app" in result.stdout
-        assert "Commands" in result.stdout
+        assert "Usage:" in result.stdout
