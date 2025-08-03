@@ -1,89 +1,111 @@
-# 開発者向けガイド
+# 開発環境セットアップガイド
 
-## uvの導入
+このドキュメントでは、開発を始めるための最小限のセットアップと、コミット前に必要な品質チェックについて説明します。
 
-このプロジェクトはパッケージ管理ツールとして`uv`を利用することを前提としています。以下の手順で`uv`をセットアップしてください。
-これにより`uv`コマンドと`uvx`コマンドが利用できます。
-`uvx`は`uv tool run`のエイリアスで、ツールをインストールせず実行できます。
+## 最小セットアップ（3ステップ）
+
+### 1. uvのインストール
 
 ```sh
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-## uvの自動補完の設定
-
-bashの場合
-
-```sh
-echo 'eval "$(uv generate-shell-completion bash)"' >> ~/.bashrc
-echo 'eval "$(uvx --generate-shell-completion bash)"' >> ~/.bashrc
-```
-
-zshの場合
-
-```sh
-echo 'eval "$(uv generate-shell-completion zsh)"' >> ~/.zshrc
-echo 'eval "$(uvx --generate-shell-completion zsh)"' >> ~/.zshrc
-```
-
-## プロジェクトのセットアップ
-
-以下のコマンドで依存パッケージをインストールしてください。
-`pre-commit`はコード品質維持のため、コミット前に自動でチェックや整形を行うツールです。
-`pre-commit`を利用することでコード整形、lint、test等の実行を強制することができます。
+### 2. プロジェクトのセットアップ
 
 ```sh
 git clone https://github.com/mkiyooka/template_cli_python.git
 cd template_cli_python
 uv sync --all-groups
 source .venv/bin/activate
+```
+
+### 3. pre-commitの設定
+
+```sh
 uvx pre-commit install
 ```
 
-## 環境管理ツールの設定（オプション）
+これで開発を開始できます。VS Codeでファイルを開けば、自動的にコード品質チェックが有効になります。
 
-このプロジェクトでは、環境管理ツールの設定テンプレートを `context/` ディレクトリに提供しています。
-お使いの環境管理ツールに応じて、必要な設定をコピーしてください。
+## コミット前の品質チェック
 
-> **事前準備**: direnvやmise自体の導入方法については、[development-guide-tools.md](./development-guide-tools.md) を参照してください。
+コードをコミットする前に、以下の品質チェックを実行してください。
 
-### direnvを使用する場合
-
-```sh
-cp context/_envrc .envrc
-direnv allow
-```
-
-### miseを使用する場合
+### 必須チェック（4つ）
 
 ```sh
-cp context/mise.toml .mise.toml
-# または
-cp context/mise.toml mise.toml
+# 1. コードフォーマット
+uv run --frozen ruff format .
+
+# 2. リント・品質チェック
+uv run --frozen ruff check . --fix
+
+# 3. 型チェック
+uv run --frozen pyright
+
+# 4. テスト実行
+uv run --frozen pytest --cov=template_cli_python --cov-report=term
 ```
 
-> **注意**: direnvとmiseを同時に使用する場合は競合する可能性があります。
-> どちらか一方の設定のみを有効化することをお勧めします。
+### 一括実行
 
-## 編集可能な状態でのインストール
-
-開発中に動作確認を行うためには、editable installを利用してください。
-editable installを利用すると、開発中のコード変更を即座に反映できます。
-ただし、開発環境では依存関係の競合や不要なパッケージ混入を防ぐため`uv add`のみを利用します。
-そのため、`uv pip`は開発環境とは異なる動作確認用ディレクトリを用意して、そのディレクトリで実行します。
+すべてのチェックを一度に実行する場合：
 
 ```sh
-git clone https://github.com/mkiyooka/template_cli_python.git template_cli_python
-mkdir installcheck && cd installcheck
-uv pip install -e ../template_cli_python
+# taskipyを使用した一括実行
+uv run task check
+
+# CI環境相当の実行
+uv run nox
 ```
 
-アンインストール方法は以下の通りですが、`uv pip uninstall`コマンドでは依存ライブラリ（このパッケージがインストール時に一緒に導入したパッケージ）が自動的に削除されず、環境内に残る場合があります。
-特に他のプロジェクトでも同じ依存ライブラリを利用していない場合や、クリーンな環境を保ちたい場合は、手動で不要なパッケージを削除することをおすすめします。
-手動で依存ライブラリを削除するには、`uv pip uninstall <パッケージ名>`を個別に実行してください。
-また、不要なパッケージが多い場合や環境をリセットしたい場合は、仮想環境ごと削除して再作成するのが確実です。
+## コード整形・リント・テストの自動化
+
+### VS Code
+
+ファイルを開くだけで自動的に以下が実行されます：
+
+- 保存時のコードフォーマット（Ruff）
+- リアルタイム型チェック（Pyright）
+- エラー・警告の表示
+
+### Pre-commit
+
+`git commit`時に自動的に以下が実行されます：
+
+- Ruffによる品質チェック（リント・フォーマット）
+- Pyrightによる型チェック
+- Pytestによるテスト実行
+- コミットメッセージの形式チェック
+
+エラーが発生した場合は、修正してから再度コミットしてください。
+
+## よくある問題と解決方法
+
+### 依存関係の問題
 
 ```sh
-uv pip uninstall template-cli-python
-cd .. && rm -rf installcheck
+uv sync --reinstall
 ```
+
+### 型チェックエラー
+
+```sh
+# 詳細なエラー情報を表示
+uv run --frozen pyright --verbose
+```
+
+### テストの失敗
+
+```sh
+# 詳細なテスト出力
+uv run --frozen pytest -v
+
+# 最初の失敗で停止
+uv run --frozen pytest -x
+```
+
+## 詳細情報
+
+- **ツールの詳細設定**: [development-guide-tools.md](./development-guide-tools.md)
+- **開発ガイドライン**: [development-guidelines.md](./development-guidelines.md)

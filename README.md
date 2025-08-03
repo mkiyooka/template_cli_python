@@ -25,6 +25,8 @@ pip install git+https://github.com/mkiyooka/template_cli_python.git
 ```sh
 # 四則演算や平均計算など、すべての機能は main_app コマンドで利用できます。
 main_app --help
+# 次のコマンドでモジュールとして呼び出すこともできます。
+python -m template_cli_python --help
 ```
 
 アンインストール方法
