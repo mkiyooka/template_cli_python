@@ -13,3 +13,35 @@ repos:
         args: ["--fix", "--show-fixes", "--exit-non-zero-on-fix"]
       - id: ruff-format
         types_or: [python, pyi]
+  - repo: local
+    hooks:
+    - id: nox
+      name: nox
+      description: 'nox testing framework'
+      entry: nox
+      language: python
+      types_or: [python, pyi]
+      pass_filenames: false
+      stages: [pre-push]
+      args: []
+      require_serial: false
+      additional_dependencies: []
+    - id: pyright
+      name: pyright
+      description: 'pyright type checker'
+      entry: pyright
+      language: python
+      types: [python, pyi]
+      args: []
+      require_serial: false
+      additional_dependencies: []
+      stages: [pre-commit]
+    - id: pytest
+      name: pytest
+      description: 'pytest testing framework'
+      entry: pytest
+      language: python
+      types: [python, pyi]
+      args: []
+      require_serial: false
+      pass_filenames: false
