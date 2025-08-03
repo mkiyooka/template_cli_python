@@ -25,16 +25,15 @@ repos:
       stages: [pre-push]
       args: []
       require_serial: false
-      additional_dependencies: []
     - id: pyright
       name: pyright
       description: 'pyright type checker'
       entry: pyright
-      language: python
+      language: node
       types: [python, pyi]
+      pass_filenames: true
       args: []
       require_serial: false
-      additional_dependencies: []
       stages: [pre-commit]
     - id: pytest
       name: pytest
@@ -42,6 +41,7 @@ repos:
       entry: pytest
       language: python
       types: [python, pyi]
+      pass_filenames: false
       args: []
       require_serial: false
-      pass_filenames: false
+      stages: [pre-commit]
