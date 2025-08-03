@@ -38,14 +38,13 @@ repos:
     - id: pyright
       name: pyright
       description: 'pyright type checker'
-      entry: pyright
-      language: python
+      entry: uv run --frozen pyright
+      language: system
       types_or: [python, pyi]
       pass_filenames: true
       args: []
       require_serial: false
       stages: [pre-commit]
-      additional_dependencies: ["pyright[nodejs]>=1.1.403"]
     - id: pytest
       name: pytest
       description: 'pytest testing framework'

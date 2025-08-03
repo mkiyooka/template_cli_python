@@ -104,5 +104,4 @@ def div(lhs: float, rhs: float) -> float:
         raise ZeroDivisionError(msg)
     if lhs == 0:
         return 0
-
     return lhs // rhs
