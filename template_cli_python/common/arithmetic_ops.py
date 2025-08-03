@@ -1,7 +1,7 @@
 """
-Provides basic arithmetic operations.
+四則演算
 
-These include addition, subtraction, multiplication, and division.
+四則演算関数により型ヒントの記述方法と、docstringの書き方を説明
 """
 
 
