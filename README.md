@@ -52,3 +52,4 @@ uv pip install .
 
 - [基本](docs/development-guide-basic.md)
 - [開発用ツール導入](docs/development-guide-tools.md)
+- [開発ガイドライン](docs/development-guidelines.md)
