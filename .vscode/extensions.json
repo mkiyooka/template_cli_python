@@ -6,5 +6,6 @@
         "njpwerner.autodocstring",
         "editorconfig.editorconfig",
         "tamasfe.even-better-toml",
+        "redhat.vscode-yaml",
     ]
 }
