@@ -1,10 +1,10 @@
 """Command line interface entry point.
 
 This module provides the entry point for running the CLI application
-using `python -m template_cli_python`.
+using `python -m <package_name>`.
 """
 
 if __name__ == "__main__":
-    from template_cli_python import cli
+    from . import cli
 
     cli.app()

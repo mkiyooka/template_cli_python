@@ -25,14 +25,6 @@ jupyter = ["ipykernel>=6.30.0", "jupyter>=1.1.1", "notebook>=7.4.4"]
 [project.scripts]
 main_app = "template_cli_python.cli:app"
 
-[tool.hatch.build.targets.wheel]
-packages = ["template_cli_python"]
-
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["template_cli_python*"]
-exclude = ["tests*", "context*"]
-
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
@@ -47,11 +39,10 @@ major_version_zero = true
 
 [tool.pyright]
 venvPath = "."
-include = ["template_cli_python"]
-exclude = ["**/node_modules", "**/__pycache__", "template_cli_python/typestubs"]
+include = ["src"]
+exclude = ["**/node_modules", "**/__pycache__"]
 ignore = ["tests"]
 defineConstant = { DEBUG = true }
-stubPath = "template_cli_python/stubs"
 
 [tool.ruff.format]
 line-ending = "lf"
@@ -135,17 +126,17 @@ pythonpath = "template_cli_python"
 addopts = ["--strict-markers", "--strict-config"]
 
 [tool.coverage.run]
-source = ["template_cli_python/**/*.py"]
+source = ["src/**/*.py"]
 branch = true
 
 [tool.coverage.report]
 skip_covered = false
 show_missing = true
-omit = ["tests/*", "noxfile.py", "template_cli_python/__main__.py"]
+omit = ["tests/*", "noxfile.py", "**/__main__.py"]
 
 [tool.taskipy.tasks]
 format = { cmd = "uv run --frozen ruff format", help = "run format" }
 lint = { cmd = "uv run --frozen ruff check --fix --show-fixes --exit-non-zero-on-fix", help = "run lint" }
 typecheck = { cmd = "uv run --frozen pyright", help = "run typecheck" }
-test = { cmd = "uv run --frozen pytest --cov=template_cli_python --cov-report=term", help = "run pytest with coverage report" }
+test = { cmd = "uv run --frozen pytest --cov=src --cov-report=term", help = "run pytest with coverage report" }
 check = { cmd = "task format && task lint && task typecheck", help = "run format, lint, typecheck" }
