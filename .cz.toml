@@ -67,4 +67,4 @@ multiline = true
 [[tool.commitizen.customize.questions]]
 type = "confirm"
 name = "show_message"
-message = 'Do you want to add body message in commit?'
+message = 'body messageを追加しますか？'
