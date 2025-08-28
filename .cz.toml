@@ -41,9 +41,17 @@ choices = [
 ]
 
 [[tool.commitizen.customize.questions]]
-type = "input"
+type = "list"
 name = "scope"
 message = "スコープ (省略可):"
+choices = [
+    {value = "", name = "-: 省略"},
+    {value = "nox", name = "nox: Nox設定"},
+    {value = "cz", name = "cz: Commitizen設定"},
+    {value = "cli", name = "cli: コマンドラインインターフェース"},
+    {value = "mean", name = "mean: 平均計算"},
+    {value = "ops", name = "ops: 算術演算"},
+]
 
 [[tool.commitizen.customize.questions]]
 type = "input"
@@ -54,8 +62,9 @@ message = "変更内容の短い説明:"
 type = "input"
 name = "body"
 message = "詳細な説明 (省略可):"
+multiline = true
 
 [[tool.commitizen.customize.questions]]
-type = "input"
-name = "footer"
-message = "フッター (省略可):"
+type = "confirm"
+name = "show_message"
+message = 'Do you want to add body message in commit?'
