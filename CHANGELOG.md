@@ -1,3 +1,5 @@
+# Release note
+
 ## Unreleased
 
 ### Fix
