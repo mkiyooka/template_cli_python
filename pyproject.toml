@@ -82,8 +82,10 @@ ignore = [
     "ANN401", # Dynamically typed expressions (Any) are disallowed
     "D400",   # First line should end with a period
     "D401",   # Relax NumPy docstring convention: first line should be imperative
+    "D403",   # Checks for docstrings that do not start with a capital letter
     "E501",   # Line length regulated by formatter
     "PT011",  # pytest.raises is too broad, set match or use a more specific exception
+    "PYI021", # docstring-in-stub
     "PYI041", # Use float instead of int | float
     "RUF022", # `__all__` is not sorted
     "RUF005", # Consider expression instead of concatenation
@@ -111,10 +113,10 @@ convention = "numpy"
 strict = true
 
 [tool.pytest.ini_options]
+pythonpath = "src/template_cli_python"
 testpaths = ["tests"]
 python_files = ["test_*.py", "*_test.py"]
 python_functions = ["test_*"]
-pythonpath = "template_cli_python"
 addopts = ["--strict-markers", "--strict-config"]
 
 [tool.coverage.run]
@@ -127,8 +129,11 @@ show_missing = true
 omit = ["tests/*", "noxfile.py", "**/__main__.py"]
 
 [tool.taskipy.tasks]
-format = { cmd = "uv run --frozen ruff format", help = "run format" }
-lint = { cmd = "uv run --frozen ruff check --fix --show-fixes --exit-non-zero-on-fix", help = "run lint" }
-typecheck = { cmd = "uv run --frozen pyright", help = "run typecheck" }
-test = { cmd = "uv run --frozen pytest --cov=src --cov-report=term", help = "run pytest with coverage report" }
-check = { cmd = "task format && task lint && task typecheck", help = "run format, lint, typecheck" }
+setup     = { cmd = "uv sync", help = "Set up Python development environment" }
+build     = { cmd = "uv pip install -e .", help = "Build and install Python package in development mode" }
+clean     = { cmd = "uv pip uninstall .", help = "Uninstall Python package" }
+test      = { cmd = "uv run --frozen pytest --cov=src --cov-report=term", help = "Run Python tests with coverage" }
+format    = { cmd = "uv run --frozen ruff format", help = "Format Python code with ruff" }
+lint      = { cmd = "uv run --frozen ruff check --fix --show-fixes --exit-non-zero-on-fix", help = "Lint Python code with ruff" }
+typecheck = { cmd = "uv run --frozen pyright", help = "Type check Python code" }
+check     = { cmd = "task format && task lint && task typecheck && task test", help = "Run all Python quality checks" }
