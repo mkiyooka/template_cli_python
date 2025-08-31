@@ -35,7 +35,6 @@ choices = [
     {value = "perf", name = "perf: パフォーマンス改善"},
     {value = "test", name = "test: テスト追加・修正"},
     {value = "build", name = "build: ビルドシステム変更"},
-    {value = "ci", name = "ci: CI設定変更"},
     {value = "chore", name = "chore: その他の変更"},
     {value = "revert", name = "revert: コミット取り消し"}
 ]
