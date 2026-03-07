@@ -7,7 +7,7 @@
         "editor.codeActionsOnSave": {
             "source.fixAll": "explicit",
             "source.organizeImports": "explicit"
-        },
+        }
     },
     /* Ruff for python */
     "ruff.lint.enable": true,
@@ -21,36 +21,75 @@
     "python.terminal.executeInFileDir": false,
     /* Python environment for testing */
     "python.experiments.optInto": ["pythonTestAdapter"],
+
     /* toml file settings */
     "[toml]": {
-        "editor.defaultFormatter": "tamasfe.even-better-toml",
-        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "tombi-toml.tombi",
+        "editor.formatOnSave": true
     },
-    "evenBetterToml.taplo.configFile.enabled": true,
-    "evenBetterToml.taplo.configFile.path": "${workspaceFolder}/taplo.toml",
-    "markdown.extension.list.indentationSize": "inherit",
+
+    /* json, jsonc */
+    "[json][jsonc]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+
+    /* yaml */
+    "[yaml]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+
+    /* markdown */
+    "[markdown]": {
+        "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
+        "editor.formatOnSave": true,
+        "editor.wordWrap": "on",
+        "editor.quickSuggestions": {
+            "comments": "off",
+            "strings": "off",
+            "other": "off"
+        }
+    },
     "markdown-preview-enhanced.breakOnSingleNewLine": false,
-    /* exclude setting */
+
+    "files.associations": {
+        ".clang-format": "yaml",
+        ".clang-tidy": "yaml",
+        ".clangd": "yaml",
+        "dprint.json": "jsonc",
+        "settings.json": "jsonc"
+    },
+
+    /* ignore, exclude settings */
     "files.exclude": {
         "**/.venv": true,
+        "**/.pixi": true,
         "**/.nox": true,
         "**/.ruff_cache": true,
         "**/.pytest_cache": true,
         "**/__pycache__": true,
         "**/*.egg-info": true,
+        "**/wheelhouse": true
     },
     "files.watcherExclude": {
         "**/.venv": true,
+        "**/.pixi": true,
         "**/.nox": true,
         "**/.ruff_cache": true,
         "**/.pytest_cache": true,
         "**/__pycache__": true,
+        "**/ext": true,
+        "**/wheelhouse": true
     },
     "search.exclude": {
         "**/.venv": true,
+        "**/.pixi": true,
         "**/.nox": true,
         "**/.ruff_cache": true,
         "**/.pytest_cache": true,
         "**/__pycache__": true,
-    },
+        "**/ext": true,
+        "**/wheelhouse": true
+    }
 }

@@ -1,12 +1,19 @@
 {
     "recommendations": [
+        // Python拡張
         "ms-python.python",
         "charliermarsh.ruff",
         "ms-pyright.pyright",
-        "njpwerner.autodocstring",
-        "usernamehw.errorlens",
+        // TOML拡張
         "tamasfe.even-better-toml",
+        "tombi-toml.tombi",
+        // Markdown拡張
         "DavidAnson.vscode-markdownlint",
-        "esbenp.prettier-vscode"
+        "TakumiI.markdowntable",
+        // 汎用拡張
+        "esbenp.prettier-vscode",
+        "tekumara.typos-vscode",
+        "usernamehw.errorlens",
+        "cschlosser.doxdocgen"
     ]
 }
